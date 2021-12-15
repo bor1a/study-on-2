@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lesson index{% endblock %}
+
+{% block body %}
+    <h1>Lesson index</h1>
+	{% set route_name = app.request.attributes.get('_route') %}
+	{{ route_name }}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lesson in lessons %}
+            <tr>
+                <td> <a href="{{ path('lesson_show', {'id' : lesson.id}) }}">{{ lesson.name }}</a></td>
+                <td>{{ lesson.description }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('lesson_new') }}">Create new</a>
+{% endblock %}
